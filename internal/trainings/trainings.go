@@ -69,19 +69,5 @@ func (t Training) ActionInfo() (string, error) {
 		return "неизвестный тип тренировки", errors.New("unknown training type")
 	}
 
-	return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", t.TrainingType, t.Duration.Hours(), distance, meanSpeed, calories), nil
-}
-
-func (t Training) Print() {
-	fmt.Printf("Тип тренировки: %s\nДлительность: %v\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n",
-		t.TrainingType, t.Duration, spentenergy.Distance(t.Steps), spentenergy.MeanSpeed(t.Steps, t.Duration), t.Calories())
-}
-
-func (t Training) Calories() float64 {
-	if t.TrainingType == "Бег" {
-		return spentenergy.RunningSpentCalories(t.Steps, t.Weight, t.Duration)
-	} else if t.TrainingType == "Ходьба" {
-		return spentenergy.WalkingSpentCalories(t.Steps, t.Weight, t.Height, t.Duration)
-	}
-	return 0
+	return fmt.Sprintf("  Тип тренировки: %s\n  Длительность: %.2f ч.\n  Дистанция: %.2f км.\n  Скорость: %.2f км/ч\n  Сожжено калорий: %.2f ккал\n", t.TrainingType, t.Duration.Hours(), distance, meanSpeed, calories), nil
 }
